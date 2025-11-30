@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TaskController;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get('/health-check', function () {
+    return response()->json([
+        'status' => 'ok',
+        'message' => 'El servicio de API de tareas está activo y respondiendo.',
+        'version' => '1.0'
+    ]);
+});
+
+Route::apiResource('tasks', TaskController::class);
