@@ -60,7 +60,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        // Laravel inyecta el modelo, si no lo halla, devuelve 404
+        return response()->json($task);
     }
 
     /**
@@ -90,6 +91,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        
+        $task->delete();
+
+        // Retornamos un 204 NO CONTENT
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
