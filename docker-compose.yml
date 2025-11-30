@@ -21,6 +21,7 @@ services:
     build:
       context: ./docker/php
     container_name: laravel_app
+    image: laravel_app:latest
     restart: unless-stopped
     working_dir: /var/www
     volumes:
