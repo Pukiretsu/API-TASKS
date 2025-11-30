@@ -23,6 +23,15 @@ class Task extends Model
     ];
 
     /**
+     * Scope dinamico: Devuelve por estado de tarea
+     * uso Task::byStatus('done')->get()
+     */
+    public function scopeByStatus(Builder $query, string $status): void
+    {
+        $query->where('status',$status);
+    }
+
+    /**
      * Scope dedicado: Tareas pendientes.
      * Uso: Task::pending()->get()
      */
