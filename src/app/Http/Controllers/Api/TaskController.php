@@ -70,7 +70,17 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        // Validamos igual que en el POST
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'sometimes|in:pending,in_progress,done',
+        ]);
+
+        $task = Task::update($validatedData);
+        
+        # Retornamos un 200 OK
+        return response()->json($task, Response::HTTP_OK);
     }
 
     /**
@@ -80,6 +90,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        
     }
 }
