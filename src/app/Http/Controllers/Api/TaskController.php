@@ -40,7 +40,17 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            // Validamos que el valor de status estè dentro del enum
+            'status' => 'sometimes|in:pending,in_progress,done',
+        ]);
+
+        $task = Task::create($validatedData);
+        
+        # Retornamos un 201 Created
+        return response()->json($task, Response::HTTP_CREATED);
     }
 
     /**
