@@ -3,8 +3,8 @@ REM Script para configurar archivos .env en Windows (Command Prompt)
 
 echo Iniciando configuracion de archivos de entorno...
 
-IF EXIST ".\.env.raiz" (
-    copy .\.env.raiz .env
+IF EXIST "env.raiz" (
+    copy env.raiz .env
     echo.
     echo Archivo .env de la raiz creado/actualizado correctamente.
 ) ELSE (
@@ -13,13 +13,13 @@ IF EXIST ".\.env.raiz" (
     exit /b 1
 )
 
-IF EXIST ".\.env.laravel" (
-    copy .\.env.laravel src\.env
+IF EXIST "env.laravel" (
+    copy env.laravel .\src\.env
     echo.
-    echo Archivo .env de Laravel (en src/) creado/actualizado correctamente.
+    echo Archivo .env de Laravel creado/actualizado correctamente.
 ) ELSE (
     echo.
-    echo ERROR: No se encontro '.\.env.laravel'. Terminando.
+    echo ERROR: No se encontro '.\env.laravel'. Terminando.
     exit /b 1
 )
 
