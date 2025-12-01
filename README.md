@@ -41,6 +41,12 @@ Comprueba que los tres servicios (**app**, **mysql**, **nginx**) se estén ejecu
 docker compose ps
 ```
 
+### Instalar composer para ejecutar artisan
+Ua vez levantados los contenedores es necesario instalar composer
+```bash
+docker compose exec app composer install
+```
+
 ### Realizar las migraciones del proyecto
 Una vez que los contenedores estén levantados, debes ejecutar las migraciones de Laravel para crear las tablas en la base de datos MySQL. Esto se hace ejecutando el comando ```php artisan migrate``` dentro del contenedor del servicio de aplicación (app), si la aplicación pregunta para crear la tabla, se selecciona _yes_.
 ```bash
@@ -66,6 +72,12 @@ Asegúrate de que **Docker Desktop** se esté ejecutando. Luego, utiliza el coma
 
 ``` powershell
 docker compose up -d --build
+```
+
+### Instalar composer para ejecutar artisan
+Ua vez levantados los contenedores es necesario instalar composer
+```bash
+docker compose exec app composer install
 ```
 
 ### Verificación de estado de los contenedores
