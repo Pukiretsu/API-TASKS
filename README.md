@@ -18,10 +18,13 @@ git clone https://github.com/Pukiretsu/API-TASKS.git
 cd API-TASKS
 ```
 
-### Configuración entorno
-En el directorio raiz se encuentra un .env.example es necesario crear un .env a partir de este para que docker compose pueda hacer el build y generar todo lo necesario para correr el proyecto.
-``` bash
-cp .env.example .env
+### Configurar .env
+Adjunto al correo con el link del repositorio están los archivos ```.env.raiz``` y ```.env.laravel``` estos deben ser situados en la raiz del repositorio, para colocar ambos archivos en sus respectivas ubicaciones es necesario ejecutar el script de bash ```env_setup.sh```
+```bash
+# Vuelve ejecutable el script
+chmod +x env_setup.sh
+# Ejecuta el script
+./env_setup.sh
 ```
 
 ### Iniciar los contenedores
@@ -39,7 +42,7 @@ docker compose ps
 ```
 
 ### Realizar las migraciones del proyecto
-Una vez que los contenedores estén levantados, debes ejecutar las migraciones de Laravel para crear las tablas en la base de datos MySQL. Esto se hace ejecutando el comando ```php artisan migrate``` dentro del contenedor del servicio de aplicación (app).
+Una vez que los contenedores estén levantados, debes ejecutar las migraciones de Laravel para crear las tablas en la base de datos MySQL. Esto se hace ejecutando el comando ```php artisan migrate``` dentro del contenedor del servicio de aplicación (app), si la aplicación pregunta para crear la tabla, se selecciona _yes_.
 ```bash
 docker compose exec app php artisan migrate
 ```
@@ -55,16 +58,9 @@ Abre tu terminal preferida (ej. _Powershell_) (Asegúrate de que _git_ esté dis
 git clone https://github.com/Pukiretsu/API-TASKS.git
 cd API-TASKS
 ```
-### Configuración entorno
-En el directorio raiz se encuentra un .env.example es necesario crear un .env a partir de este para que docker compose pueda hacer el build y generar todo lo necesario para correr el proyecto
-``` powershell
-# En powershell
-Copy-Item .env.example .env
-```
-``` bash
-# En git-bash o CMD
-cp .env.example .env
-```
+### Configurar .env
+Adjunto al correo con el link del repositorio están los archivos ```.env.raiz``` y ```.env.laravel``` estos deben ser situados en la **raiz** del repositorio, para colocar ambos archivos en sus respectivas ubicaciones es necesario ejecutar el script ```env_setup.bat```
+
 ### Iniciar los contenedores
 Asegúrate de que **Docker Desktop** se esté ejecutando. Luego, utiliza el comando ```docker compose up``` para construir y arrancar los servicios.
 
