@@ -73,12 +73,12 @@ class TaskController extends Controller
     {
         // Validamos igual que en el POST
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'sometimes|string|max:255', // Se modifica a sometimes para que no sea requerido al usar patch
             'description' => 'nullable|string',
             'status' => 'sometimes|in:pending,in_progress,done',
         ]);
 
-        $task = Task::update($validatedData);
+        $task->update($validatedData); // se llama update en la instancia no en la clase para evitar errores en el envio de datos.
         
         # Retornamos un 200 OK
         return response()->json($task, Response::HTTP_OK);
