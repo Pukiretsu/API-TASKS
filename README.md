@@ -42,7 +42,7 @@ docker compose ps
 ```
 
 ### Instalar composer para ejecutar artisan
-Ua vez levantados los contenedores es necesario instalar composer
+Una vez levantados los contenedores es necesario instalar composer
 ```bash
 docker compose exec app composer install
 ```
@@ -75,7 +75,7 @@ docker compose up -d --build
 ```
 
 ### Instalar composer para ejecutar artisan
-Ua vez levantados los contenedores es necesario instalar composer
+Una vez levantados los contenedores es necesario instalar composer
 ```bash
 docker compose exec app composer install
 ```
