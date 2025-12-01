@@ -112,7 +112,7 @@ window.taskApp = (function() {
                         </div>
 
                         <!-- Descripción -->
-                        <p class="text-sm text-gray-600">${task.description}</p>
+                        <p class="text-sm text-gray-600">${task.description? task.description: ""}</p>
                     </div>
                     <div class="flex space-x-2 shrink-0">
                         <!-- Botón para editar: redirige a la nueva ruta /tasks/{id}/edit -->
