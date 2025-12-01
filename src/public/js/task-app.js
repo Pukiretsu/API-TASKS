@@ -181,6 +181,55 @@ window.taskApp = (function() {
         });
     }
 
+    // Carga los datos de una tarea en el formulario de edición
+    function loadTaskForEdit(taskId) { 
+        $.ajax({
+            url: `${API_BASE_URL}/${taskId}`,
+            method: 'GET',
+            success: function(task) {
+                // Llenar el formulario
+                $('#title').val(task.title);
+                $('#description').val(task.description);
+                $('#status').val(task.status);
+            },
+            error: function() {
+                showModal('Error de Carga', 'No se pudo cargar la tarea para edición.');
+                window.location.href = `/tasks/`;
+            }
+        });
+    }
+
+    // Maneja el envío del formulario (Crear o Editar)
+    function handleFormSubmit(taskId) {
+        let method = $('#form-method').val();
+        let url = taskId ? `${API_BASE_URL}/${taskId}` : API_BASE_URL;
+        
+        // Laravel necesita que el verbo sea POST con el campo _method para simular PUT/PATCH
+        const httpMethod = (method === 'PUT') ? 'POST' : method;
+        $.ajax({
+            url: url,
+            method: httpMethod,
+            data: $('#task-form').serialize(), // Serializa todos los campos (incluye _token y _method)
+            // Agregamos el token CSRF a los encabezados para mayor robustez
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val() 
+            },
+            success: function() {
+                window.location.href = '/tasks'; 
+            },
+            error: function(xhr) {
+                let errorTitle = 'Error al procesar la solicitud.';
+                let errorMsg = 'Ha ocurrido un error inesperado.';
+
+                if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                    errorMsg = 'Error de Validación de Datos';
+                }
+
+                showModal(errorTitle, errorMsg);
+            }
+        });
+    }
+
     return {
         loadTasks,
         deleteTask,
@@ -188,5 +237,7 @@ window.taskApp = (function() {
         closeModal,
         confirmDelete,
         redirectToEdit,
+        loadTaskForEdit,
+        handleFormSubmit
     };
 })();
